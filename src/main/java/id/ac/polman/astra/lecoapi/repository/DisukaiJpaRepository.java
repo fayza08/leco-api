@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import java.io.Serializable;
 import java.util.List;
+import java.util.Optional;
 
 @Repository("DisukaiJpaRepository")
 public interface DisukaiJpaRepository extends JpaRepository<Disukai, Serializable> {
@@ -15,4 +16,6 @@ public interface DisukaiJpaRepository extends JpaRepository<Disukai, Serializabl
 
     @Query("SELECT r FROM Resep r, Disukai d WHERE r.Id = d.Id_resep and d.Id_user = ?1")
     List<Resep> findById_user(Integer id_user);
+
+
 }

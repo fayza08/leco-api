@@ -4,6 +4,7 @@ import id.ac.polman.astra.lecoapi.repository.DisukaiJpaRepository;
 import id.ac.polman.astra.lecoapi.repository.ResepJpaRepository;
 import id.ac.polman.astra.lecoapi.vo.Disukai;
 import id.ac.polman.astra.lecoapi.vo.Resep;
+import id.ac.polman.astra.lecoapi.vo.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -50,5 +51,15 @@ public class DisukaiService {
         resep.setNilai(nilai);
 
         mResepJpaRepository.save(resep);
+    }
+
+    public boolean deleteDisukai(Integer id){
+        Disukai result = mDisukaiJpaRepository.getById(id);
+
+        if(result == null){
+            return false;
+        }
+        mDisukaiJpaRepository.delete(result);
+        return true;
     }
 }

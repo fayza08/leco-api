@@ -1,15 +1,11 @@
 package id.ac.polman.astra.lecoapi.Controller;
 
 import id.ac.polman.astra.lecoapi.service.DisukaiService;
-//import id.ac.polman.astra.lecoapi.service.ResepService;
 import id.ac.polman.astra.lecoapi.vo.Disukai;
 import id.ac.polman.astra.lecoapi.vo.Resep;
 import id.ac.polman.astra.lecoapi.vo.Result;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletResponse;
 import java.text.SimpleDateFormat;
@@ -44,6 +40,18 @@ public class DisukaiController {
 
         if(isSuccess){
             return new Result(200, "Success");
+        }else{
+            response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+            return new Result(500, "Fail");
+        }
+    }
+
+    @DeleteMapping("/disukai")
+    public Object deleteDisukai(HttpServletResponse response, @RequestParam("id") Integer id){
+        boolean isSuccess = mDisukaiService.deleteDisukai(id);
+
+        if(isSuccess){
+            return new Result(200,"Success");
         }else{
             response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
             return new Result(500, "Fail");
