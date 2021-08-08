@@ -47,7 +47,16 @@ public class DisukaiController {
     }
 
     @DeleteMapping("/disukai")
-    public Object deleteDisukai(HttpServletResponse response, @RequestParam("id") Integer id){
+    public Object deleteDisukai(HttpServletResponse response, @RequestParam("id_user") Integer id_user, @RequestParam("id_resep") Integer id_resep){
+        Integer id = 0;
+        List<Disukai> disukais = mDisukaiService.getDisukais();
+
+        for(Disukai d : disukais){
+            if(d.getId_user().equals(id_user) && d.getId_resep().equals(id_resep)){
+                id = d.getId();
+            }
+        }
+
         boolean isSuccess = mDisukaiService.deleteDisukai(id);
 
         if(isSuccess){

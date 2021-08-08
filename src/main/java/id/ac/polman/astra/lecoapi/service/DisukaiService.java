@@ -53,9 +53,17 @@ public class DisukaiService {
         mResepJpaRepository.save(resep);
     }
 
+    private void updateResepDel(Integer id){
+        Resep resep = mResepJpaRepository.findById(id);
+        int nilai = resep.getNilai() - 1;
+        resep.setNilai(nilai);
+
+        mResepJpaRepository.save(resep);
+    }
+
     public boolean deleteDisukai(Integer id){
         Disukai result = mDisukaiJpaRepository.getById(id);
-
+        updateResepDel(result.getId_resep());
         if(result == null){
             return false;
         }
