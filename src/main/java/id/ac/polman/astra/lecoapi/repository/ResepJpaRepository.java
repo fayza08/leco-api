@@ -10,6 +10,8 @@ import java.util.List;
 
 @Repository("ResepJpaRepository")
 public interface ResepJpaRepository extends JpaRepository<Resep, Serializable> {
+
+    @Query("SELECT r FROM Resep r WHERE r.status = 0")
     List<Resep> findAll();
 
     @Query("SELECT r FROM Resep r WHERE r.Id = ?1")
